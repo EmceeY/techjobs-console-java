@@ -7,7 +7,9 @@ import org.apache.commons.csv.CSVRecord;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
@@ -20,6 +22,7 @@ public class JobData {
     private static Boolean isDataLoaded = false;
 
     private static ArrayList<HashMap<String, String>> allJobs;
+
 
     /**
      * Fetch list of all values from loaded data,
@@ -83,6 +86,40 @@ public class JobData {
 
         return jobs;
     }
+
+    public static ArrayList<HashMap<String, String>> findByValue( String searchTerm) {
+
+        ArrayList<HashMap<String, String>> listReturn = new ArrayList<>();
+
+        loadData();
+
+        for (int i = 0; i < allJobs.size(); i++) {
+
+            for (String key : allJobs.get(i).keySet()) {
+
+                String fromDataPosition = (allJobs.get(i).get(key));
+
+                ArrayList<String> position = new ArrayList<>(Arrays.asList(fromDataPosition.split(" ")));
+
+                    for (String word : position){
+
+                        if (searchTerm == word) {
+
+                            HashMap<String, String> results = new HashMap<>();
+
+                            results.put(key, allJobs.get(i).get(key));
+
+                            listReturn.add(results);
+
+                        }
+                }
+            }
+
+        }
+        return listReturn;
+    }
+
+
 
     /**
      * Read in data from a CSV file and store it in a list
