@@ -94,23 +94,19 @@ public class JobData {
         loadData();
 
         for (int i = 0; i < allJobs.size(); i++) {
-
+            //iterate through all keys in hashmap for search
             for (String key : allJobs.get(i).keySet()) {
-
+                //set position as a string
                 String fromDataPosition = (allJobs.get(i).get(key));
-
+                //Split apart string to search each item
                 ArrayList<String> position = new ArrayList<>(Arrays.asList(fromDataPosition.split(" ")));
-
+                    //iterate through words
                     for (String word : position){
 
-                        if (searchTerm == word) {
+                        //if there is a match
+                        if (searchTerm.equals(word)){
 
-                            HashMap<String, String> results = new HashMap<>();
-
-                            results.put(key, allJobs.get(i).get(key));
-
-                            listReturn.add(results);
-
+                            listReturn.add(allJobs.get(i));
                         }
                 }
             }
