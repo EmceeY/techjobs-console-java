@@ -100,9 +100,12 @@ public class JobData {
                 ArrayList<String> position = new ArrayList<>(Arrays.asList(fromDataPosition.split(" ")));
                 //iterate through words
                 for (String word : position) {
+                    //create word checks
+                    String lowerWord = word.toLowerCase();
 
+                    String lowerSearchTerm = searchTerm.toLowerCase();
                     //if there is a match
-                    if (searchTerm.equals(word)) {
+                    if (lowerSearchTerm.equals(lowerWord)) {
 
                         listReturn.add(allJobs.get(i));
                     }
