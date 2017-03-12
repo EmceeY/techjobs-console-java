@@ -8,10 +8,8 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
 import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
+import java.util.LinkedHashSet;
 
 /**
  * Created by LaunchCode
@@ -100,21 +98,25 @@ public class JobData {
                 String fromDataPosition = (allJobs.get(i).get(key));
                 //Split apart string to search each item
                 ArrayList<String> position = new ArrayList<>(Arrays.asList(fromDataPosition.split(" ")));
-                    //iterate through words
-                    for (String word : position){
+                //iterate through words
+                for (String word : position) {
 
-                        //if there is a match
-                        if (searchTerm.equals(word)){
+                    //if there is a match
+                    if (searchTerm.equals(word)) {
 
-                            listReturn.add(allJobs.get(i));
-                        }
+                        listReturn.add(allJobs.get(i));
+                    }
                 }
             }
-
         }
-        return listReturn;
+        ArrayList<HashMap<String, String>> tempListReturn = new ArrayList<>();
+        for (HashMap<String, String> entry : listReturn) {
+            if (!tempListReturn.contains(entry)) {
+                tempListReturn.add(entry);
+            }
+        }
+        return tempListReturn;
     }
-
 
 
     /**
